@@ -5,3 +5,7 @@ body{
     background: rgb(241,245,241);
     font-family: outfit;
 }
+
+input{
+    outline: none;
+}
