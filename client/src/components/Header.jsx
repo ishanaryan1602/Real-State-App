@@ -1,8 +1,7 @@
-import { current } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 import React from 'react'
 
 import { FaSearch } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
