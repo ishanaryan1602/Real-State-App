@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import React from 'react'
 
-import { FaSearch } from 'react-icons/fa'
+import { FaArrowRight, FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
@@ -15,9 +15,9 @@ export default function Header() {
                         <span className='text-slate-700 font-semibold'>Estates</span>
                     </h1>
                 </Link>
-                <form className='bg-slate-100 p-3 rounded-lg flex items-center w-32 sm:w-60' >
-                    <input type="text" placeholder='Search...' className='bg-transparent outline-none' />
-                    <FaSearch className='text-slate-600' />
+                <form className='bg-slate-100 p-3 rounded-lg flex items-center w-32 sm:w-60 relative' >
+                    <input type="text" placeholder='Search...' className='bg-transparent ' />
+                    <FaSearch className='absolute right-5 top-[50%] translate-y-[-50%] cursor-pointer'/>
                 </form>
                 <ul className='flex gap-4'>
                     <Link to="/"><li className='hidden sm:inline text-slate-700 hover:underline'>Home</li></Link>
