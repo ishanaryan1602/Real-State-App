@@ -35,8 +35,6 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
-  console.log(formData);
-
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
