@@ -171,7 +171,7 @@ export default function CreateListing() {
             placeholder="Name"
             className="border p-3 rounded-lg"
             id="name"
-            maxLength="10"
+            // maxLength="10"
             required
             onChange={handleChange}
             value={formData.name}
