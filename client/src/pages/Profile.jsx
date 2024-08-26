@@ -275,9 +275,10 @@ export default function Profile() {
                 >
                   <FaTrash />
                 </button>
+                <Link to={`/update-listing/${listing._id}`}>
                 <button className="text-green-700 text-md">
                   <FaPen />
-                </button>
+                </button></Link>
               </div>
             </div>
           </div>
