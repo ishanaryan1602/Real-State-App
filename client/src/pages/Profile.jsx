@@ -20,6 +20,7 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { FaPen, FaTrash } from "react-icons/fa";
 
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -29,6 +30,8 @@ export default function Profile() {
   const [fileError, setFileError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingError, setShowListingError] = useState(false);
+  const [userListings, setUserLisings] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -123,6 +126,21 @@ export default function Profile() {
     }
   };
 
+  const handleShowListing = async () => {
+    try {
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if (data.success === false) {
+        setShowListingError(true);
+        return;
+      }
+      setShowListingError(false);
+      setUserLisings(data);
+    } catch (err) {
+      setShowListingError(true);
+    }
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -182,7 +200,13 @@ export default function Profile() {
         >
           {loading ? "Loading..." : "UPDATE"}
         </button>
-        <Link to={"/create-listing"}  className="bg-green-700 rounded-lg p-3 uppercase text-white hover:opacity-80 text-center" > Create Listing </Link>
+        <Link
+          to={"/create-listing"}
+          className="bg-green-700 rounded-lg p-3 uppercase text-white hover:opacity-80 text-center"
+        >
+          {" "}
+          Create Listing{" "}
+        </Link>
       </form>
       <div className="flex mt-5 justify-between ">
         <span
@@ -199,6 +223,44 @@ export default function Profile() {
       <p className="text-green-700 mt-5">
         {updateSuccess ? "User is updated succesfully" : ""}
       </p>
+      <button className="text-green-700 w-full" onClick={handleShowListing}>
+        Show Listing
+      </button>
+      <p className="text-red-700">
+        {showListingError ? "Error fetching listing" : ""}
+      </p>
+      {userListings &&
+        userListings.length > 0 &&
+        userListings?.map((listing) => (
+          <div className="flex flex-col">
+            <div
+              key={listing._id}
+              className="flex p-3 justify-between items-center gap-4 shadow-sm shadow-gray-300 mb-6"
+            >
+              <Link to={`/listing/${listing._id}`}>
+                <img
+                  src={listing.imageUrls[0]}
+                  alt="listing-cover"
+                  className="h-16 w-20 object-cover"
+                />
+              </Link>
+              <Link
+                className="hover:underline truncate flex-1"
+                to={`/listing/${listing._id}`}
+              >
+                <p>{listing.name}</p>
+              </Link>
+              <div className="flex items-center gap-5">
+                <button className="text-red-700 text-md">
+                  <FaTrash />
+                </button>
+                <button className="text-green-700 text-md">
+                  <FaPen />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
     </div>
   );
 }
