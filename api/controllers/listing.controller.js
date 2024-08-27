@@ -1,4 +1,5 @@
 import Listing from "../models/listing.model.js";
+import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const createListing = async (req, res, next) => {
@@ -31,7 +32,11 @@ export const updateListing = async (req, res, next) => {
       errorHandler(401, "You can only make changes to personal Listing")
     );
   try {
-    const updatedlisting = await Listing.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    const updatedlisting = await Listing.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     res.status(200).json(updatedlisting);
   } catch (err) {
     next(err);
@@ -46,4 +51,15 @@ export const getListing = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if(!user) return next(errorHandler(401, "User not found"));
+    const {password : pass , ...rest} = user._doc;
+    res.status(200).json(rest); 
+  } catch (err) {
+    next(err);
+  }
+};

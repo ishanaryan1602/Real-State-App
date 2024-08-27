@@ -13,6 +13,7 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 export default function Listing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -78,7 +79,7 @@ export default function Listing() {
             />
           </div>
           {copied && (
-            <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2'>
+            <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
               Link copied!
             </p>
           )}
@@ -99,12 +100,12 @@ export default function Listing() {
                 {listing.type === "rent" ? "For Rent" : "For Sale"}
               </p>
               {listing.offer && (
-                <p className="flex gap-1 text-xl items-start">
+                <div className="flex gap-1 text-xl items-start">
                   <p className="text-green-700">${+listing.discountPrice}</p>
                   <p className="text-red-500 line-through text-xs">
                     ${+listing.regularPrice}
                   </p>
-                </p>
+                </div>
               )}
             </div>
             <p className="text-slate-800 font-normal mb-2">
@@ -132,17 +133,17 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
-            {currentUser &&
-              listing.userRef !==
-                currentUser._id && (
-                  <button
-                    onClick={() => setContact(true)}
-                    className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
-                  >
-                    Contact landlord
-                  </button>
-                )}
-            {/* {contact && <Contact listing={listing} />} */}
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
+              <button
+                onClick={() => setContact(true)}
+                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3 mt-5"
+              >
+                Contact landlord
+              </button>
+            )}
+            <div className="mt-5">
+              {contact && <Contact listing={listing} />}
+            </div>
           </div>
         </div>
       )}
