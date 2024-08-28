@@ -19,10 +19,12 @@
 - React
 - CSS
 - HTML
+- Redux (for state management)
 
 ### Backend
 - Node.js
 - Express
+- JWT (JSON Web Token) for authentication
 
 ### Database
 - MongoDB Atlas
