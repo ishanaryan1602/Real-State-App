@@ -3,9 +3,9 @@
 [Live Demo](https://real-state-app-dy3k.onrender.com/)
 
 ## Table of Contents
+- [Images](#images)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Images](#images)
 
 ## Features
 - **Advanced Search Functionality:** Seamlessly integrated search with dynamic filters, enabling users to precisely tailor their property search experience.
@@ -17,8 +17,7 @@
 
 ### Frontend
 - React
-- CSS
-- HTML
+- Tailwind
 - Redux (for state management)
 
 ### Backend
