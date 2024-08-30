@@ -5,7 +5,7 @@
 ## Table of Contents
 - [Images](#images)
 - [Features](#features)
-- [Technologies Used](#technologies-used)
+- [Techn Stack](#technologies-used)
 
 ## Features
 - **Advanced Search Functionality:** Seamlessly integrated search with dynamic filters, enabling users to precisely tailor their property search experience.
